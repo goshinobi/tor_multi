@@ -18,7 +18,7 @@ func processListHandle(w http.ResponseWriter, r *http.Request) {
 	w.Write(bin)
 }
 
-func createProxyHandle(w http.ResponseWriter, r *http.Request) {
+func addProxyHandle(w http.ResponseWriter, r *http.Request) {
 	err := tor.StartProxy()
 	if err != nil {
 		w.Write([]byte(err.Error()))
@@ -39,6 +39,9 @@ func killAllProxyHandle(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte(result))
 }
 
+func killProxyHandle(w http.ResponseWriter, r *http.Request) {
+}
+
 func root(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte(""))
 }
@@ -46,7 +49,7 @@ func root(w http.ResponseWriter, r *http.Request) {
 func main() {
 	http.HandleFunc("/", root)
 	http.HandleFunc("/list", processListHandle)
-	http.HandleFunc("/create", createProxyHandle)
-	http.HandleFunc("/kill", killAllProxyHandle)
+	http.HandleFunc("/add", addProxyHandle)
+	http.HandleFunc("/killAll", killAllProxyHandle)
 	http.ListenAndServe(":8080", nil)
 }
