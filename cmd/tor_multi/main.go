@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"strconv"
 
 	"github.com/goshinobi/tor"
 )
@@ -40,6 +41,28 @@ func killAllProxyHandle(w http.ResponseWriter, r *http.Request) {
 }
 
 func killProxyHandle(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json; charset=UTF-8")
+	n, err := strconv.Atoi(r.PostFormValue("n"))
+	if err != nil {
+		bin, _ := json.Marshal(struct {
+			Status string
+			Err    error
+		}{
+			"failed",
+			err,
+		})
+		w.Write(bin)
+		return
+	}
+
+	bin, _ := json.Marshal(struct {
+		Status string
+		N      int
+	}{
+		"failed",
+		n,
+	})
+	w.Write(bin)
 }
 
 func root(w http.ResponseWriter, r *http.Request) {
@@ -51,5 +74,6 @@ func main() {
 	http.HandleFunc("/list", processListHandle)
 	http.HandleFunc("/add", addProxyHandle)
 	http.HandleFunc("/killAll", killAllProxyHandle)
+	http.HandleFunc("/kill", killProxyHandle)
 	http.ListenAndServe(":8080", nil)
 }
