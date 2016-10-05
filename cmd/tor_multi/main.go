@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/goshinobi/tor"
+	"github.com/goshinobi/tor_multi"
 )
 
 func processListHandle(w http.ResponseWriter, r *http.Request) {
