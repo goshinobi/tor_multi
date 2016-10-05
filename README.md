@@ -6,13 +6,23 @@ This is tor proxy controller package.
 
 ## install tor_multi
 ```
-$ go install github.com/goshinobi/tor/cmd/tor_multi
+$ go install github.com/goshinobi/tor_multi/cmd/tor_multi
 ```
 
 ## install tor
 ### OS X
 ```
 $ brew install tor
+```
+## run tor_multi
+```
+$ go run ${TOR_MULTI_REPO_DIR}/cmd/tor_multi/main.go
+```
+
+or
+
+```
+$ tor_multi
 ```
 
 ## API
