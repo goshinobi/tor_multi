@@ -1,6 +1,7 @@
 # tor 
 This is tor proxy controller package.
 
+
 ## what is Tor?
 * [Wikipedia - Tor](https://en.wikipedia.org/wiki/Tor)
 
@@ -8,6 +9,14 @@ This is tor proxy controller package.
 ```
 $ go install github.com/goshinobi/tor_multi/cmd/tor_multi
 ```
+
+## Support
+### OS
+* Linux
+* OS X
+
+### Go Versions
+* go 1.7
 
 ## install tor
 ### OS X
@@ -40,3 +49,4 @@ $ tor_multi
 ```
 /killAll
 ```
+
