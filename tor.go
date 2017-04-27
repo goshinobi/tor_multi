@@ -26,11 +26,11 @@ type ProxyInfo struct {
 }
 
 type TorConf struct {
-	ID            *int
-	SocksPort     int
-	ControlPort   int
-	DataDirectory string
-	ConfPath      string
+	ID            *int   `json:"id"`
+	SocksPort     int    `json:"socks_port"`
+	ControlPort   int    `json:"control_port"`
+	DataDirectory string `json:"data_directory"`
+	ConfPath      string `conf_path`
 }
 
 func init() {
