@@ -26,6 +26,7 @@ type ProxyInfo struct {
 }
 
 type TorConf struct {
+	ID            *int
 	SocksPort     int
 	ControlPort   int
 	DataDirectory string
@@ -55,6 +56,7 @@ func isExist(name string) bool {
 
 func CreateTorConf(n int) (*TorConf, error) {
 	c := &TorConf{
+		nil,
 		getPort(),
 		getPort(),
 		fmt.Sprintf("%s/tor%d", TOR_LIB, n),
@@ -71,18 +73,19 @@ func CreateTorConf(n int) (*TorConf, error) {
 	return c, nil
 }
 
-func StartProxy() error {
+func StartProxy() (*TorConf, error) {
 	proxyID := LATEST_PROXY_ID
 	LATEST_PROXY_ID++
 
 	conf, err := CreateTorConf(proxyID)
+	conf.ID = &proxyID
 	if err != nil {
-		return err
+		return nil, err
 	}
 	cmd := exec.Command("tor", "-f", conf.ConfPath)
 	err = cmd.Start()
 	if err != nil {
-		return err
+		return nil, err
 	}
 	PROXY_LIST[proxyID] = &ProxyInfo{
 		conf,
@@ -90,7 +93,7 @@ func StartProxy() error {
 		time.Now(),
 		cmd,
 	}
-	return nil
+	return conf, nil
 }
 
 func KillTorProxy(n int) error {
