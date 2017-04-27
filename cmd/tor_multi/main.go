@@ -20,7 +20,7 @@ func processListHandle(w http.ResponseWriter, r *http.Request) {
 }
 
 func addProxyHandle(w http.ResponseWriter, r *http.Request) {
-	err := tor.StartProxy()
+	_, err := tor.StartProxy()
 	if err != nil {
 		w.Write([]byte(err.Error()))
 		return

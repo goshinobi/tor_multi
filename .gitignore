@@ -114,3 +114,5 @@ flycheck_*.el
 
 # projectiles files
 .projectile
+
+vendor/
